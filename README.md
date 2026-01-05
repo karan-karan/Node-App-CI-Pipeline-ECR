@@ -12,7 +12,6 @@ my-node-app
 │   └── app.js           # Main application file
 ├── tests
 │   └── app.test.js      # Test cases for the application
-├── node_modules/        # Installed npm dependencies (auto-generated)
 ├── .eslintrc.js         # ESLint configuration file
 ├── package.json         # npm configuration file
 ├── package-lock.json    # Lockfile for exact dependency versions
@@ -42,8 +41,8 @@ This file locks the exact versions of all dependencies and their sub-dependencie
 
 1. Clone the repository:
    ```
-   git clone <repository-url>
-   cd my-node-app
+   git clone https://github.com/karan-karan/Basic-Node-App.git
+   cd Basic-Node-App
    ```
 
 2. Install the dependencies:
