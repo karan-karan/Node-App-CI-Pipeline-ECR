@@ -78,6 +78,5 @@ The ESLint configuration includes:
 - Custom rules for indentation (4 spaces), single quotes, and semicolons
 - Jest environment enabled for test files to recognize testing globals
 
-## License
 
-This project is licensed under the MIT License.
+<img width="940" height="392" alt="image" src="https://github.com/user-attachments/assets/c7a5adb3-f6d5-4107-b240-db1d4ff86d43" />
