@@ -1,4 +1,4 @@
-name: CI Pipeline to build and push Docker image to ECR
+name: CI - Node App Build, Test & Push to ECR
 on:
   push:
     branches:
@@ -8,8 +8,48 @@ env:
   ECR_REPOSITORY: node-app
   IMAGE_TAG: latest
 
+#----------------------------------------------------
+# 1. Matrix Build + LINT + TEST
+#----------------------------------------------------
 jobs:
-  build-and-push:
+  build-and-test:
+    name: Build and Test on ${{ matrix.os }} with Node.js ${{ matrix['node-version'] }}
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node-version: [18, 20]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix['node-version'] }}
+
+      # Install dependencies
+      - name: Install Dependencies
+        run: npm ci
+
+      # Lint the code
+      - name: Run Linter
+        run: npm run lint
+
+      # Run tests
+      - name: Run Tests
+        run: npm test
+
+
+#----------------------------------------------------
+# 2. Multi-Stage Docker Build + Push
+# Runs only after successful completion of build-and-test job
+#----------------------------------------------------
+  docker-build-and-push:
+    name: Build and Push Docker Image to ECR
+    needs: build-and-test
     runs-on: ubuntu-latest
 
     steps:
