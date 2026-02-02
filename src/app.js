@@ -5,6 +5,15 @@ const path = require('path');
 const PORT = process.env.PORT || 3000;
 
 const server = http.createServer((req, res) => {
+    // Health check endpoint
+    if (req.url === '/health') {
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ status: 'OK' }));
+        return;
+    }
+
+
+    // Serve static HTML file
     if (req.url === '/') {
         fs.readFile(path.join(__dirname, '../public/index.html'), 'utf8', (err, data) => {
             if (err) {
