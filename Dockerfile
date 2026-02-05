@@ -17,8 +17,13 @@ WORKDIR /app
 # Copy only what is needed from build stage
 COPY --from=build /app /app
 
+ENV NODE_ENV=production
+ENV NODE_OPTIONS="--max-old-space-size=2048"
+
 # Expose application port
 EXPOSE 3000
+
+HEALTHCHECK CMD-SHELL curl -f http://localhost:3000/health || exit 1
 
 # Start application
 CMD ["node", "src/app.js"]
