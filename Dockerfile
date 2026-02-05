@@ -23,7 +23,7 @@ ENV NODE_OPTIONS="--max-old-space-size=2048"
 # Expose application port
 EXPOSE 3000
 
-HEALTHCHECK CMD-SHELL curl -f http://localhost:3000/health || exit 1
+HEALTHCHECK CMD curl -f http://localhost:3000/health || exit 1
 
 # Start application
 CMD ["node", "src/app.js"]
